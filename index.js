@@ -31,10 +31,9 @@ app.get("/api/:date?", (req, res) => {
   if (dateObj.toString() === "Invalid Date") {
     dateObj = new Date(parseInt(date));
   }
-  if (dateObj.toString() === "Invalid Date") {
+  if (dateObj.toString() === "Invalid Date" && date != undefined) {
     res.json({ error: "Invalid Date" });
-  }
-  if (date === undefined) {
+  } else if (date === undefined) {
     res.json({ unix: Now.getTime(), utc: Now.toUTCString() });
   } else {
     res.json({ unix: dateObj.getTime(), utc: dateObj.toUTCString() });
